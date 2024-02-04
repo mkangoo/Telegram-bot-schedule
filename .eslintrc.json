@@ -26,6 +26,13 @@
 				"js": "ignorePackages"
 			}
 		],
-		"prefer-destructuring": "off"
+		"prefer-destructuring": "off",
+		"no-restricted-syntax": [
+			"error",
+			{
+				"selector": "ForStatement",
+				"message": "Циклы for запрещены. Пожалуйста, используйте другие конструкции, такие как forEach, map, reduce и т. д."
+			}
+		]
 	}
 }

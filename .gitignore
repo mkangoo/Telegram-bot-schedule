@@ -1,0 +1,8 @@
+# modules
+node_modules/
+
+# bot_token
+.env
+
+# temp
+Tasks.md

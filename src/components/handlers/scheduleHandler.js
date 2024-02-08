@@ -39,24 +39,31 @@ const getLessonsInfo = targetDay => {
 	// If no lesson information is found for the specified day, return an error message
 	if (!lessonToday) return MESSAGE
 	// Get the current day of the week
-	const today = getWeek(new Date())
+	const currentWeek = getWeek(new Date())
 
 	// Format lesson information for the specified day
-	return (
-		lessonToday.events
-			// Iterate through all lessons for the specified day
-			.map(event => {
-				const { lection = [], practical = [] } = event
-				// Determine the type of lesson (lecture or practice) based on the current day of the week
-				const lessonType = lection.includes(today) ? 'Лекция' : practical.includes(today) ? 'Практика' : null
-				// If the lesson type is determined, format the lesson information; otherwise, return null
-				return lessonType ? formatLessons(lessonType, event) : null
-			})
-			// Remove all null values that may have occurred if the lesson type was not determined
-			.filter(info => info !== null)
-			// Concatenate the formatted lesson information into a single string
-			.join(' ')
-	)
+	const formattedLessons = lessonToday.events
+		// Iterate through all lessons for the specified day
+		.map(event => {
+			const { lection = [], practical = [] } = event
+			// Determine the type of lesson (lecture or practice) based on the current day of the week
+			const lessonType = lection.includes(currentWeek)
+				? 'Лекция'
+				: practical.includes(currentWeek)
+					? 'Практика'
+					: null
+			// If the lesson type is determined, format the lesson information; otherwise, return null
+			return lessonType ? formatLessons(lessonType, event) : null
+		})
+		// Remove all null values that may have occurred if the lesson type was not determined
+		.filter(info => info !== null)
+		// Concatenate the formatted lesson information into a single string
+		.join(' ')
+
+	// If all lessons returned null, return MESSAGE
+	if (!formattedLessons) return MESSAGE
+
+	return formattedLessons
 }
 
 /**

@@ -15,6 +15,7 @@
 		"no-console": "warn",
 		"no-plusplus": "off",
 		"eol-last": "off",
+		"no-else-return": "off",
 		"spaced-comment": "off",
 		"max-len": ["error", 130],
 		"import/prefer-default-export": "off",

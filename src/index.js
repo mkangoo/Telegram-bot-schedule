@@ -15,7 +15,7 @@ bot.command('start', ctx => {
 	const userName = user.first_name
 	const pseudonym = user.username
 	const greetingName = userName || pseudonym
-	ctx.reply(`Привет, ${greetingName}!${greetingMessage}`, getMainMenu())
+	ctx.reply(`Привет, ${greetingName}!\n${greetingMessage}`, getMainMenu())
 })
 
 bot.command('schedule', handlerReplyBtn.scheduleWeek)

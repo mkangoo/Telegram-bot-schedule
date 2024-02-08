@@ -9,7 +9,7 @@ export const dataBase = [
 				lection: [2, 3, 4, 5, 6, 7],
 				practical: [8, 9],
 				description: 'Дегтярёва В.В.',
-				class: 'ЛК - 538',
+				audience: 'ЛК - 538',
 			},
 			{
 				start: '2024-01-22T09:55:00',
@@ -18,7 +18,7 @@ export const dataBase = [
 				lection: [],
 				practical: [2, 3, 4, 5, 6, 7, 8, 9],
 				description: 'Дегтярёва В.В.',
-				class: 'ЛК - 538',
+				audience: 'ЛК - 538',
 			},
 			{
 				start: '2024-01-22T11:35:00',
@@ -27,7 +27,8 @@ export const dataBase = [
 				lection: [2, 3, 4, 5, 6, 7, 8, 9],
 				practical: [8, 9],
 				description: 'Дзюрдзя О.А.',
-				class: 'ЛК - 407',
+				audience: 'ЛК - 407',
+				//????
 			},
 			{
 				start: '2024-01-22T13:45:00',
@@ -36,7 +37,7 @@ export const dataBase = [
 				lection: [],
 				practical: [2, 4, 6, 8],
 				description: 'Дзюрдзя О.А.',
-				class: 'ЛК - 408',
+				audience: 'ЛК - 408',
 			},
 		],
 	},
@@ -62,7 +63,7 @@ export const dataBase = [
 				lection: [2, 3, 4, 5, 6, 7],
 				practical: [8, 9],
 				description: 'Дегтярёва В.В.',
-				class: 'ЛК - 402',
+				audience: 'ЛК - 402',
 			},
 			{
 				start: '2024-01-22T11:35:00',
@@ -71,7 +72,7 @@ export const dataBase = [
 				lection: [],
 				practical: [2, 3, 4, 5, 6, 7, 8, 9],
 				description: 'Дегтярёва В.В.',
-				class: 'ЛК - 107',
+				audience: 'ЛК - 107',
 			},
 			{
 				start: '2024-01-22T13:45:00',
@@ -80,7 +81,7 @@ export const dataBase = [
 				lection: [],
 				practical: [3, 5, 7],
 				description: 'Дегтярёва В.В.',
-				class: 'ЛК - 402',
+				audience: 'ЛК - 402',
 			},
 		],
 	},
@@ -94,7 +95,7 @@ export const dataBase = [
 				lection: [2, 3, 4, 5, 6, 7],
 				practical: [8, 9],
 				description: 'Бигачева Е.Н.',
-				class: 'ЛК - 407',
+				audience: 'ЛК - 407',
 			},
 			{
 				start: '2024-01-22T09:55:00',
@@ -103,7 +104,7 @@ export const dataBase = [
 				lection: [],
 				practical: [2, 3, 4, 5, 6, 7, 8, 9],
 				description: 'Бигачева Е.Н.',
-				class: 'ЛК - 407',
+				audience: 'ЛК - 407',
 			},
 			{
 				start: '2024-01-22T11:35:00',
@@ -112,7 +113,7 @@ export const dataBase = [
 				lection: [],
 				practical: [3, 5, 7, 9],
 				description: 'Дзюрдзя О.А.',
-				class: 'ЛК-402',
+				audience: 'ЛК-402',
 			},
 		],
 	},
@@ -126,7 +127,7 @@ export const dataBase = [
 				lection: [1, 2, 3, 4, 5, 6],
 				practical: [7, 8],
 				description: 'Сергеева К.Н.',
-				class: 'ЛК - 507',
+				audience: 'ЛК - 507',
 			},
 			{
 				start: '2024-01-22T09:55:00',
@@ -135,7 +136,7 @@ export const dataBase = [
 				lection: [],
 				practical: [1, 2, 3, 4, 5, 6, 7, 8],
 				description: 'Сергеева К.Н.',
-				class: 'ЛК - 507',
+				audience: 'ЛК - 507',
 			},
 			{
 				start: '2024-01-22T11:35:00',
@@ -144,7 +145,7 @@ export const dataBase = [
 				lection: [],
 				practical: [2, 4],
 				description: 'Сергеева К.Н.',
-				class: 'ЛК - 411',
+				audience: 'ЛК - 411',
 			},
 		],
 	},

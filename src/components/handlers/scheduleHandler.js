@@ -9,7 +9,7 @@ const MESSAGE = '<b>🎉 Занятий нет, можно отдыхать.</b>
  *
  * @param {string} type - The type of the lesson, can be "Lecture" or "Practice".
  *
- * @returns {string} - The formatted lesson information for display.
+ * @returns {string} - 	  The formatted lesson information for display.
  */
 const formatLessons = (type, { start, end, title, description, audience }) => {
 	// Extract start and end times
@@ -29,18 +29,20 @@ const formatLessons = (type, { start, end, title, description, audience }) => {
 /**
  * Retrieves information about the lessons for the specified day.
  *
- * @param {string} targetDay - The target day for which lessons information is required.
+ * @param {string} targetDay -        The target day for which lessons information is required.
  *
- * @returns {string} - A formatted string containing lesson information for the specified day.
+ * @param {boolean} shouldShiftWeek - Flag defining today is Sunday and the user has clicked the 'Schedule for tomorrow' button
+ *
+ * @returns {string} - 		          A formatted string containing lesson information for the specified day.
  */
-const getLessonsInfo = targetDay => {
+const getLessonsInfo = (targetDay, shouldShiftWeek) => {
 	// Find information about the lessons for the specified day
 	const lessonToday = dataBase.find(({ day, events }) => day === targetDay && events)
 	// If no lesson information is found for the specified day, return an error message
 	if (!lessonToday) return MESSAGE
 	// Get the current day of the week
-	const currentWeek = getWeek(new Date())
-
+	const getNumberWeek = getWeek(new Date())
+	const currentWeek = shouldShiftWeek ? getNumberWeek + 1 : getNumberWeek
 	// Format lesson information for the specified day
 	const formattedLessons = lessonToday.events
 		// Iterate through all lessons for the specified day
@@ -69,15 +71,22 @@ const getLessonsInfo = targetDay => {
 /**
  * Retrieves the schedule for a specific day, considering a shift if necessary.
  *
- * @param {number} shiftDay - The shift for the 'Schedule for tomorrow' button.
- * @returns {string} - The formatted string containing lesson information for the specified day.
+ * @param {number} shiftDay -         The shift for the 'Schedule for tomorrow' button.
+ *                            		  Positive value shifts the schedule forward, negative value shifts it backward.
+ *                            		  Default is 0, representing the current day.
+ *
+ * @param {boolean} shouldShiftWeek - Specifies whether to shift a week forward if today is Sunday.
+ *									  Shift only works if today is Sunday and shiftDay === 1
+ *
+ * @returns {string} - 				  The formatted string containing lesson information for the specified day.
  */
 export const getScheduleForDay = (shiftDay = 0) => {
-	const currentDate = new Date()
-	const dayIndex = (currentDate.getDay() + shiftDay) % 7
-
+	const currentDay = new Date().getDay()
+	const dayIndex = (currentDay + shiftDay) % 7
+	let shouldShiftWeek = false
+	if (currentDay === 0 && shiftDay === 1) shouldShiftWeek = true
 	// Retrieve the schedule for the specified day based on the day index
-	return getLessonsInfo(DAY_OF_WEEK[dayIndex])
+	return getLessonsInfo(DAY_OF_WEEK[dayIndex], shouldShiftWeek)
 }
 
 // Object containing the schedule for each day of the week

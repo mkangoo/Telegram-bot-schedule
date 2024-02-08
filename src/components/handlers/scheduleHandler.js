@@ -27,6 +27,30 @@ const formatLessons = (type, { start, end, title, description, audience }) => {
 }
 
 /**
+ * Determines the type of lesson (lecture or practice) based on the current week.
+ *
+ * @param {object} event - An object containing information about the lesson.
+ *
+ * @param {number} currentWeek - The current week number.
+ *
+ * @returns {string|null} - The type of the lesson, can be 'Лекция', 'Практика', or null if not found.
+ */
+const getLessonType = (event, currentWeek) => {
+	// Destructure the event object to extract the lection and practical arrays
+	const { lection = [], practical = [] } = event
+	// Check if the current week is in the lection array
+	if (lection.includes(currentWeek)) {
+		return 'Лекция'
+	}
+	// Check if the current week is in the practical array
+	else if (practical.includes(currentWeek)) {
+		return 'Практика'
+	}
+	// Return null if neither lection nor practical includes the current week
+	return null
+}
+
+/**
  * Retrieves information about the lessons for the specified day.
  *
  * @param {string} targetDay -        The target day for which lessons information is required.
@@ -47,14 +71,7 @@ const getLessonsInfo = (targetDay, shouldShiftWeek) => {
 	const formattedLessons = lessonToday.events
 		// Iterate through all lessons for the specified day
 		.map(event => {
-			const { lection = [], practical = [] } = event
-			// Determine the type of lesson (lecture or practice) based on the current day of the week
-			const lessonType = lection.includes(currentWeek)
-				? 'Лекция'
-				: practical.includes(currentWeek)
-					? 'Практика'
-					: null
-			// If the lesson type is determined, format the lesson information; otherwise, return null
+			const lessonType = getLessonType(event, currentWeek)
 			return lessonType ? formatLessons(lessonType, event) : null
 		})
 		// Remove all null values that may have occurred if the lesson type was not determined

@@ -16,7 +16,7 @@
 		"no-plusplus": "off",
 		"eol-last": "off",
 		"spaced-comment": "off",
-		"max-len": ["error", 120],
+		"max-len": ["error", 130],
 		"import/prefer-default-export": "off",
 		"no-nested-ternary": "off",
 		"import/extensions": [

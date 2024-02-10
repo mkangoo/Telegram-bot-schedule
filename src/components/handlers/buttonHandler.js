@@ -12,7 +12,7 @@ export const handlerReplyBtn = {
 		ctx.replyWithHTML('<b>Выберите день:</b>', weekdaySelector())
 	},
 	scheduleNextWeek: ctx => {
-		ctx.replyWithHTML(weekdaySelector())
+		ctx.replyWithHTML('<b>Выберите день:</b>', weekdaySelector(true))
 	},
 }
 

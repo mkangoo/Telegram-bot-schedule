@@ -6,7 +6,7 @@ import { getMainMenu } from './components/keyboards/keyboards.js'
 import { contactInfo } from './contactMe.js'
 import { handlerReplyBtn, addButtonAction } from './components/handlers/buttonHandler.js'
 import { isWeekEven, getWeek } from './components/definitionOfWeek.js'
-import { schedule } from './components/handlers/scheduleHandler.js'
+import { getLessonsInfo } from './components/handlers/scheduleHandler.js'
 
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN, { polling: true })
 
@@ -50,11 +50,17 @@ bot.hears('Текущая неделя', handlerReplyBtn.scheduleWeek)
 
 bot.hears('Следующая неделя', handlerReplyBtn.scheduleNextWeek)
 
-addButtonAction(bot, 'btnMon', schedule.monday.lessons)
-addButtonAction(bot, 'btnTue', schedule.tuesday.lessons)
-addButtonAction(bot, 'btnWed', schedule.wednesday.lessons)
-addButtonAction(bot, 'btnThu', schedule.thursday.lessons)
-addButtonAction(bot, 'btnFri', schedule.friday.lessons)
+addButtonAction(bot, 'btnMon', getLessonsInfo('Monday'))
+addButtonAction(bot, 'btnTue', getLessonsInfo('Tuesday'))
+addButtonAction(bot, 'btnWed', getLessonsInfo('Wednesday'))
+addButtonAction(bot, 'btnThu', getLessonsInfo('Thursday'))
+addButtonAction(bot, 'btnFri', getLessonsInfo('Friday'))
+
+addButtonAction(bot, 'btnMonNextWeek', getLessonsInfo('Monday', true))
+addButtonAction(bot, 'btnTueNextWeek', getLessonsInfo('Tuesday', true))
+addButtonAction(bot, 'btnWedNextWeek', getLessonsInfo('Wednesday', true))
+addButtonAction(bot, 'btnThuNextWeek', getLessonsInfo('Thursday', true))
+addButtonAction(bot, 'btnFriNextWeek', getLessonsInfo('Friday', true))
 
 bot.launch()
 

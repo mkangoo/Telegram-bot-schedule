@@ -59,7 +59,7 @@ const getLessonType = (event, currentWeek) => {
  *
  * @returns {string} - 		          A formatted string containing lesson information for the specified day.
  */
-const getLessonsInfo = (targetDay, shouldShiftWeek) => {
+export const getLessonsInfo = (targetDay, shouldShiftWeek) => {
 	// Find information about the lessons for the specified day
 	const lessonToday = dataBase.find(({ day, events }) => day === targetDay && events)
 	// If no lesson information is found for the specified day, return an error message
@@ -104,23 +104,4 @@ export const getScheduleForDay = (shiftDay = 0) => {
 	if (currentDay === 0 && shiftDay === 1) shouldShiftWeek = true
 	// Retrieve the schedule for the specified day based on the day index
 	return getLessonsInfo(DAY_OF_WEEK[dayIndex], shouldShiftWeek)
-}
-
-// Object containing the schedule for each day of the week
-export const schedule = {
-	monday: {
-		lessons: getLessonsInfo('Monday'),
-	},
-	tuesday: {
-		lessons: getLessonsInfo('Tuesday'),
-	},
-	wednesday: {
-		lessons: getLessonsInfo('Wednesday'),
-	},
-	thursday: {
-		lessons: getLessonsInfo('Thursday'),
-	},
-	friday: {
-		lessons: getLessonsInfo('Friday'),
-	},
 }

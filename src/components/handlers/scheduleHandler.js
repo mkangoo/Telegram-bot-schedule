@@ -35,7 +35,7 @@ const formatLessons = (type, { start, end, title, description, audience }) => {
  *
  * @returns {string|null} - The type of the lesson, can be 'Лекция', 'Практика', or null if not found.
  */
-const getLessonType = (event, currentWeek) => {
+export const getLessonType = (event, currentWeek) => {
 	// Destructure the event object to extract the lection and practical arrays
 	const { lection = [], practical = [] } = event
 	// Check if the current week is in the lection array

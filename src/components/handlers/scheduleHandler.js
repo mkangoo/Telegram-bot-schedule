@@ -97,8 +97,11 @@ export const getLessonsInfo = (targetDay, shouldShiftWeek) => {
  *
  * @returns {string} - 				  The formatted string containing lesson information for the specified day.
  */
-export const getScheduleForDay = (shiftDay = 0) => {
-	const currentDay = new Date().getDay()
+export const getDayOfWeek = (shiftDay = 0) => {
+	const date = new Date()
+	const currentHours = date.getUTCHours()
+	date.setUTCHours(currentHours + 3)
+	const currentDay = date.getDay()
 	const dayIndex = (currentDay + shiftDay) % 7
 	let shouldShiftWeek = false
 	if (currentDay === 0 && shiftDay === 1) shouldShiftWeek = true

@@ -1,12 +1,12 @@
 import { weekdaySelector, createUrlBtn } from '../keyboards/keyboards.js'
-import { getScheduleForDay } from './scheduleHandler.js'
+import { getDayOfWeek } from './scheduleHandler.js'
 
 export const handlerReplyBtn = {
 	scheduleToday: ctx => {
-		ctx.replyWithHTML(getScheduleForDay(), createUrlBtn())
+		ctx.replyWithHTML(getDayOfWeek(), createUrlBtn())
 	},
 	scheduleForTomorrow: ctx => {
-		ctx.replyWithHTML(getScheduleForDay(1), createUrlBtn())
+		ctx.replyWithHTML(getDayOfWeek(1), createUrlBtn())
 	},
 	scheduleWeek: ctx => {
 		ctx.replyWithHTML('<b>Выберите день:</b>', weekdaySelector())

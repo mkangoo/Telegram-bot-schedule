@@ -1,4 +1,4 @@
-import { getLessonType } from '../src/components/handlers/scheduleHandler'
+import { getLessonType } from '../../src/components/handlers/scheduleHandler'
 
 describe('getLessonType function', () => {
 	it('should return "Лекция" if the current week is in the lection array', () => {

@@ -3,6 +3,6 @@ export const contactInfo = `
 
 Сontacts:
 ---------
-Telegramm: @mkangoo
+Telegram: @mkangoo
 Mail: mkangoo24@gmail.com
 `

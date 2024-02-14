@@ -45,7 +45,7 @@ export const dataBase = [
 		events: [
 			{
 				start: '2024-01-22T08:15:00',
-				end: '2024-01-22T13:45:00',
+				end: '2024-01-22T15:15:00',
 				title: 'Проектное обучение',
 				lection: [],
 				practical: [2, 3, 4, 5, 6, 7, 8, 9],
@@ -71,7 +71,7 @@ export const dataBase = [
 				lection: [],
 				practical: [2, 3, 4, 5, 6, 7, 8, 9],
 				description: 'Дегтярёва В.В.',
-				audience: 'ЛК - 107',
+				audience: 'ЛК - 402',
 			},
 			{
 				start: '2024-01-22T13:45:00',

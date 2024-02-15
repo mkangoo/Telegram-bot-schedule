@@ -1,6 +1,3 @@
-Contributing Guide
----
-
 ## Contributing Guide
 
 Thank you for considering contributing to our project! Here's how you can get started:
@@ -20,13 +17,24 @@ Thank you for considering contributing to our project! Here's how you can get st
     npm install
     ```
 
-3. **Start the Project**: Once the dependencies are installed, start the project:
+3. ***Setting Up Bot Token***:
+
+- **Registering the Bot and Obtaining the Token**: Go to [BotFather](https://t.me/BotFather), register your bot, and obtain a unique token.
+
+- **Creating the `.env` File**: Create a file named `.env` in the root directory of your project.
+
+- **Adding the Token to the `.env` File**: Add your token to the `.env` file as shown below:
+
+	```bash
+	TELEGRAM_TOKEN = 'Your token'
+	```
+4. **Start the Project**: After installing the dependencies and adding the token, start the project:
 
     ```bash
-    npm start
+    npm run dev
     ```
 
-4. **Testing**: Ensure all tests pass successfully:
+5. **Testing**: Ensure all tests pass successfully:
 
     ```bash
     npm test

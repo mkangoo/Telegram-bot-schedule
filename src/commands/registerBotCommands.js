@@ -13,8 +13,8 @@ export default bot => {
 		const greetingName = userName || pseudonym
 		ctx.reply(`Привет, ${greetingName}!\n${greetingMessage}`, getMainMenu())
 	}
-	const getWeekScheduleHandler = () => handlerReplyBtn.scheduleWeek()
-	const getWeekInfoHandler = async ctx => {
+	const getWeekScheduleHandler = ctx => handlerReplyBtn.scheduleWeek(ctx)
+	const getWeekInfoHandler = ctx => {
 		const date = new Date()
 		const week = isWeekEven(date) ? 'Четная' : 'Нечетная'
 		ctx.replyWithHTML(`📆Сейчас <b>${week}</b> неделя\n📆Номер недели: <b>${getWeek(new Date())}</b>`)
@@ -29,7 +29,7 @@ export default bot => {
 	]
 
 	commands.forEach(({ command, handler }) => {
-		bot.command(command, handler)
+		bot.command(command, ctx => handler(ctx))
 	})
 
 	const preparedToSetCommands = commands.map(({ command, description }) => ({

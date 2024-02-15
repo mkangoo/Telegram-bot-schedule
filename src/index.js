@@ -1,32 +1,20 @@
 import { Telegraf } from 'telegraf'
 import 'dotenv/config'
 
-import { greetingMessage } from './greetings.js'
-import { getMainMenu } from './components/keyboards/keyboards.js'
-import { contactInfo } from './contactMe.js'
 import { handlerReplyBtn, addButtonAction } from './components/handlers/buttonHandler.js'
-import { isWeekEven, getWeek } from './components/definitionOfWeek.js'
 import { getLessonsInfo } from './components/handlers/scheduleHandler.js'
+import { commands } from './commandsList.js'
+import { commandHandler } from './commandHandler.js'
 
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN, { polling: true })
 
-bot.command('start', ctx => {
-	const user = ctx.from
-	const userName = user.first_name
-	const pseudonym = user.username
-	const greetingName = userName || pseudonym
-	ctx.reply(`Привет, ${greetingName}!\n${greetingMessage}`, getMainMenu())
+//Command processing
+Object.keys(commandHandler).forEach(command => {
+	bot.command(command, commandHandler[command])
 })
 
-bot.command('schedule', handlerReplyBtn.scheduleWeek)
-
-bot.command('support', ctx => ctx.reply(contactInfo))
-
-bot.command('week', async ctx => {
-	const date = new Date()
-	const week = isWeekEven(date) ? 'Четная' : 'Нечетная'
-	ctx.replyWithHTML(`📆Сейчас <b>${week}</b> неделя\n📆Номер недели: <b>${getWeek(new Date())}</b>`)
-})
+//Commands list
+bot.telegram.setMyCommands(commands)
 
 bot.hears('Сегодня', handlerReplyBtn.scheduleToday)
 

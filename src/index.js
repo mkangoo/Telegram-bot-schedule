@@ -28,20 +28,6 @@ bot.command('week', async ctx => {
 	ctx.replyWithHTML(`📆Сейчас <b>${week}</b> неделя\n📆Номер недели: <b>${getWeek(new Date())}</b>`)
 })
 
-bot.command('hide', ctx => {
-	ctx.reply('Клавиатура скрыта. Чтобы вернуть ее, используй /show.', {
-		reply_markup: {
-			remove_keyboard: true,
-		},
-	})
-})
-
-bot.command('show', ctx => {
-	ctx.reply('Клавиатура на месте.Чтобы скрыть ее, используй /hide', {
-		reply_markup: getMainMenu().reply_markup,
-	})
-})
-
 bot.hears('Сегодня', handlerReplyBtn.scheduleToday)
 
 bot.hears('Завтра', handlerReplyBtn.scheduleForTomorrow)

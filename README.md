@@ -1,6 +1,6 @@
 # Schedule Guu Bot
 
-**Bot showing the schedule for the Innovatics 4-1 group.**
+**Bot showing the schedule for the Innovatika 4-1 group.**
 
 **Created as part of the Telegraph library practice.**
 
@@ -14,6 +14,4 @@
 - /start - Start the bot
 - /schedule - View schedule
 - /week - Determine even/odd weeks
-- /show - Show the answer panel
-- /hide - Hide the Answer Panel
 - /support - Contact information for communication

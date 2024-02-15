@@ -3,18 +3,11 @@ import 'dotenv/config'
 
 import { handlerReplyBtn, addButtonAction } from './components/handlers/buttonHandler.js'
 import { getLessonsInfo } from './components/handlers/scheduleHandler.js'
-import { commands } from './commandsList.js'
-import { commandHandler } from './commandHandler.js'
+import registerBotCommands from './commands/registerBotCommands.js'
 
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN, { polling: true })
 
-//Command processing
-Object.keys(commandHandler).forEach(command => {
-	bot.command(command, commandHandler[command])
-})
-
-//Commands list
-bot.telegram.setMyCommands(commands)
+registerBotCommands(bot)
 
 bot.hears('Сегодня', handlerReplyBtn.scheduleToday)
 

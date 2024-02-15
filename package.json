@@ -14,7 +14,7 @@
 	"keywords": [],
 	"author": "mkangoo",
 	"license": "MIT",
-	"description": "Bot showing schedule for GUU group Innovatica 4-1",
+	"description": "Bot showing schedule for GUU group Innovatika 4-1",
 	"dependencies": {
 		"dotenv": "^16.4.2",
 		"nodemon": "^3.0.3",

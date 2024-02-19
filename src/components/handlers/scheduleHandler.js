@@ -108,3 +108,11 @@ export const getDayOfWeek = (shiftDay = 0) => {
 	// Retrieve the schedule for the specified day based on the day index
 	return getLessonsInfo(DAY_OF_WEEK[dayIndex], shouldShiftWeek)
 }
+
+export const getScheduleWeek = shiftWeek => {
+	const scheduleWeek = DAY_OF_WEEK.filter(element => element !== 'Sunday' && element !== 'Saturday').map(element => {
+		const dayOfWeek = getLessonsInfo(element, shiftWeek).trim()
+		return `\n🛑 <b>${element}</b>:\n\n ${dayOfWeek}\n`
+	})
+	return scheduleWeek.join('')
+}

@@ -14,4 +14,6 @@
 - /start - Start the bot
 - /schedule - View schedule
 - /week - Determine even/odd weeks
+- /week_schedule - Schedule for the current week
+- /next_week_schedule - Schedule for the next week
 - /support - Contact information for communication

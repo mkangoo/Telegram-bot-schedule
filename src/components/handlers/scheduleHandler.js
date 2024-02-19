@@ -11,7 +11,7 @@ const MESSAGE = '<b>🎉 Занятий нет, можно отдыхать.</b>
  *
  * @returns {string} - 	  The formatted lesson information for display.
  */
-const formatLessons = (type, { start, end, title, description, audience }) => {
+const getFormatLessons = (type, { start, end, title, description, audience }) => {
 	// Extract start and end times
 	const startTime = start.slice(11, 16)
 	const endTime = end.slice(11, 16)
@@ -29,11 +29,11 @@ const formatLessons = (type, { start, end, title, description, audience }) => {
 /**
  * Determines the type of lesson (lecture or practice) based on the current week.
  *
- * @param {object} event - An object containing information about the lesson.
+ * @param {object} event - 		 An object containing information about the lesson.
  *
  * @param {number} currentWeek - The current week number.
  *
- * @returns {string|null} - The type of the lesson, can be 'Лекция', 'Практика', or null if not found.
+ * @returns {string|null} - 	 The type of the lesson, can be 'Лекция', 'Практика', or null if not found.
  */
 export const getLessonType = (event, currentWeek) => {
 	// Destructure the event object to extract the lection and practical arrays
@@ -72,7 +72,7 @@ export const getLessonsInfo = (targetDay, shouldShiftWeek) => {
 		// Iterate through all lessons for the specified day
 		.map(event => {
 			const lessonType = getLessonType(event, currentWeek)
-			return lessonType ? formatLessons(lessonType, event) : null
+			return lessonType ? getFormatLessons(lessonType, event) : null
 		})
 		// Remove all null values that may have occurred if the lesson type was not determined
 		.filter(info => info !== null)
@@ -107,4 +107,22 @@ export const getDayOfWeek = (shiftDay = 0) => {
 	if (currentDay === 0 && shiftDay === 1) shouldShiftWeek = true
 	// Retrieve the schedule for the specified day based on the day index
 	return getLessonsInfo(DAY_OF_WEEK[dayIndex], shouldShiftWeek)
+}
+/**
+ * Function to get the weekly schedule.
+ * @param {number} shiftWeek - Shift of the week
+ * @returns {string} - Line with the full weekly schedule
+ */
+export const getScheduleWeek = shiftWeek => {
+	// Filter the days of the week, excluding Sunday and Saturday,
+	// then convert each day of the week into a string with its schedule.
+	const scheduleWeek = DAY_OF_WEEK.filter(element => element !== 'Sunday' && element !== 'Saturday').map(element => {
+		// Get information about classes for the current day of the week
+		// and delete extra spaces from the beginning and end of the string.
+		const dayOfWeek = getLessonsInfo(element, shiftWeek).trim()
+		// Return a string with information about the day of the week and its schedule.
+		return `\n🛑 <b>${element}</b>:\n\n ${dayOfWeek}\n`
+	})
+	// Combine the rows with the schedule for each day of the week into a single row and return the result.
+	return scheduleWeek.join('')
 }

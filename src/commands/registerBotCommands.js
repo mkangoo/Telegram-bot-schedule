@@ -2,7 +2,7 @@ import { greetingMessage } from '../greetings.js'
 import { getMainMenu } from '../components/keyboards/keyboards.js'
 import { getWeek, isWeekEven } from '../components/definitionOfWeek.js'
 import { contactInfo } from '../contactMe.js'
-import { handlerReplyBtn } from '../components/handlers/buttonHandler.js'
+import { getScheduleWeek } from '../components/handlers/scheduleHandler.js'
 
 /** @param {import('telegraf').Telegraf} bot*/
 export default bot => {
@@ -13,7 +13,11 @@ export default bot => {
 		const greetingName = userName || pseudonym
 		ctx.reply(`Привет, ${greetingName}!\n${greetingMessage}`, getMainMenu())
 	}
-	const getWeekScheduleHandler = ctx => handlerReplyBtn.scheduleWeek(ctx)
+	const getWeekScheduleHandler = shiftWeek => {
+		return ctx => {
+			ctx.replyWithHTML(getScheduleWeek(shiftWeek))
+		}
+	}
 	const getWeekInfoHandler = ctx => {
 		const date = new Date()
 		const week = isWeekEven(date) ? 'Четная' : 'Нечетная'
@@ -23,8 +27,9 @@ export default bot => {
 
 	const commands = [
 		{ command: 'start', handler: startHandler, description: 'Запустить бота' },
-		{ command: 'schedule', handler: getWeekScheduleHandler, description: 'Посмотреть расписание' },
 		{ command: 'week', handler: getWeekInfoHandler, description: 'Какая сейчас неделя' },
+		{ command: 'week_schedule', handler: getWeekScheduleHandler(), description: 'Расписание на эту неделю' },
+		{ command: 'next_week_schedule', handler: getWeekScheduleHandler(1), description: 'Расписание на следующую неделю' },
 		{ command: 'support', handler: getSupportHandler, description: 'Написать в поддержку' },
 	]
 

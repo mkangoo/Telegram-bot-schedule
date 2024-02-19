@@ -1,5 +1,5 @@
 import { greetingMessage } from '../greetings.js'
-import { getMainMenu } from '../components/keyboards/keyboards.js'
+import { getMainMenu, createUrlBtn } from '../components/keyboards/keyboards.js'
 import { getWeek, isWeekEven } from '../components/definitionOfWeek.js'
 import { contactInfo } from '../contactMe.js'
 import { getScheduleWeek } from '../components/handlers/scheduleHandler.js'
@@ -15,7 +15,7 @@ export default bot => {
 	}
 	const getWeekScheduleHandler = shiftWeek => {
 		return ctx => {
-			ctx.replyWithHTML(getScheduleWeek(shiftWeek))
+			ctx.replyWithHTML(getScheduleWeek(shiftWeek), createUrlBtn())
 		}
 	}
 	const getWeekInfoHandler = ctx => {

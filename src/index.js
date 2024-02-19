@@ -9,13 +9,13 @@ const bot = new Telegraf(process.env.TELEGRAM_TOKEN, { polling: true })
 
 registerBotCommands(bot)
 
-bot.hears('Сегодня', handlerReplyBtn.scheduleToday)
+bot.hears('Сегодня', handlerReplyBtn.getScheduleToday)
 
-bot.hears('Завтра', handlerReplyBtn.scheduleForTomorrow)
+bot.hears('Завтра', handlerReplyBtn.getScheduleForTomorrow)
 
-bot.hears('Текущая неделя', handlerReplyBtn.scheduleWeek)
+bot.hears('Текущая неделя', handlerReplyBtn.getScheduleWeek)
 
-bot.hears('Следующая неделя', handlerReplyBtn.scheduleNextWeek)
+bot.hears('Следующая неделя', handlerReplyBtn.getScheduleNextWeek)
 
 addButtonAction(bot, 'btnMon', getLessonsInfo('Monday'))
 addButtonAction(bot, 'btnTue', getLessonsInfo('Tuesday'))

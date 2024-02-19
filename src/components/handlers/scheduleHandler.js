@@ -108,11 +108,21 @@ export const getDayOfWeek = (shiftDay = 0) => {
 	// Retrieve the schedule for the specified day based on the day index
 	return getLessonsInfo(DAY_OF_WEEK[dayIndex], shouldShiftWeek)
 }
-
+/**
+ * Function to get the weekly schedule.
+ * @param {number} shiftWeek - Shift of the week
+ * @returns {string} - Line with the full weekly schedule
+ */
 export const getScheduleWeek = shiftWeek => {
+	// Filter the days of the week, excluding Sunday and Saturday,
+	// then convert each day of the week into a string with its schedule.
 	const scheduleWeek = DAY_OF_WEEK.filter(element => element !== 'Sunday' && element !== 'Saturday').map(element => {
+		// Get information about classes for the current day of the week
+		// and delete extra spaces from the beginning and end of the string.
 		const dayOfWeek = getLessonsInfo(element, shiftWeek).trim()
+		// Return a string with information about the day of the week and its schedule.
 		return `\n🛑 <b>${element}</b>:\n\n ${dayOfWeek}\n`
 	})
+	// Combine the rows with the schedule for each day of the week into a single row and return the result.
 	return scheduleWeek.join('')
 }

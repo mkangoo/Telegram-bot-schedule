@@ -4,13 +4,15 @@ Thank you for considering contributing to our project! Here's how you can get st
 
 ### Running the Project
 
-1. **Clone the Repository**: Begin by cloning the repository to your local machine:
+1. **Clone the Repository**:  
+   Begin by cloning the repository to your local machine:
 
     ```bash
     git clone <repository_URL>
     ```
 
-2. **Install Dependencies**: Navigate to the project directory and install the required dependencies using npm:
+2. **Install Dependencies**:  
+ Navigate to the project directory and install the required dependencies using npm:
 
     ```bash
     cd project-directory
@@ -28,7 +30,8 @@ Thank you for considering contributing to our project! Here's how you can get st
 	```bash
 	TELEGRAM_TOKEN = 'Your token'
 	```
-4. **Start the Project**: After installing the dependencies and adding the token, start the project:
+4.  **Start the Project**:  
+    After installing the dependencies and adding the token, start the project:
 
     ```bash
     npm run dev
@@ -39,6 +42,45 @@ Thank you for considering contributing to our project! Here's how you can get st
     ```bash
     npm test
     ```
+### BOT SETUP
+1. **Setting up a schedule**:  
+    Edit the file `src/data/database.js.` If there are no lectures or practices, leave the corresponding array empty.
+	``` bash
+	day: 'Friday',
+		events: [
+			{
+				// Start Time
+				start: '2024-01-22T08:15:00',
+
+				// End Time
+				end: '2024-01-22T09:45:00',
+
+				// Item Name
+				title: 'Maths',
+
+				// Week Numbers For Lectures
+				lection: [1, 2, 3, 4, 5, 6],
+
+				// Week Numbers For Practical
+				practical: [7, 8],
+
+				// Full Name Of The Teacher
+				description: 'Sergeeva K.N.',
+
+				// Audience
+				audience: 'LK - 507',
+			}
+		]
+	```
+2. **Support**:  
+    By command `/support` the user receives a message with contact information for communication. Edit the file `src/contactMe.js`
+
+3. **Time Offset**:  
+  Please note that the project uses time offset +3 Moscow time. To adjust the value, change line 104 in the file `src/handlers/scheduleHandler.js`
+	```bash
+	date.setUTCHours(currentHours + 3)
+	```
+
 
 ### Making Changes
 

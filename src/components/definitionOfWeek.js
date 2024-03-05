@@ -5,7 +5,7 @@
  *
  * @returns {number} -  The calculated week number.
  */
-export const getWeek = date => {
+export const getWeekNumber = date => {
 	const DAYS_IN_WEEK = 7
 	const MILLISECONDS_IN_DAY = 86400000
 	const FEBRUARY = 1
@@ -21,4 +21,4 @@ export const getWeek = date => {
 	return calculateWeekNumber()
 }
 
-export const isWeekEven = date => getWeek(date) % 2 === 0
+export const isWeekEven = date => getWeekNumber(date) % 2 === 0

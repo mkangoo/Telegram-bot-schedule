@@ -1,23 +1,21 @@
-import { getWeek } from '../definitionOfWeek.js'
+import { getWeekNumber } from '../definitionOfWeek.js'
 import { dataBase } from '../../data/database.js'
 
-const DAY_OF_WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-const MESSAGE = '<b>🎉 Занятий нет, можно отдыхать.</b>'
+const orderedWeekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+const NO_LESSONS_MESSAGE = '<b>🎉 Занятий нет, можно отдыхать.</b>'
 
 /**
  * Formats the lesson information for display to the user.
  *
- * @param {string} type - The type of the lesson, can be "Lecture" or "Practice".
+ * @param {'Лекция' | 'Практика'} lessonType
  *
  * @returns {string} - 	  The formatted lesson information for display.
  */
-const getFormatLessons = (type, { start, end, title, description, audience }) => {
+const getFormatLessons = (lessonType, { start, end, title, description, audience }) => {
 	// Extract start and end times
 	const startTime = start.slice(11, 16)
 	const endTime = end.slice(11, 16)
 
-	// Retrieve lesson details or use default values if not provided
-	const lessonType = type
 	const lessonTitle = title || ''
 	const lessonDescription = description || ''
 	const audienceInfo = audience || ''
@@ -36,17 +34,12 @@ const getFormatLessons = (type, { start, end, title, description, audience }) =>
  * @returns {string|null} - 	 The type of the lesson, can be 'Лекция', 'Практика', or null if not found.
  */
 export const getLessonType = (event, currentWeek) => {
-	// Destructure the event object to extract the lection and practical arrays
 	const { lection = [], practical = [] } = event
-	// Check if the current week is in the lection array
 	if (lection.includes(currentWeek)) {
 		return 'Лекция'
-	}
-	// Check if the current week is in the practical array
-	else if (practical.includes(currentWeek)) {
+	} else if (practical.includes(currentWeek)) {
 		return 'Практика'
 	}
-	// Return null if neither lection nor practical includes the current week
 	return null
 }
 
@@ -56,31 +49,25 @@ export const getLessonType = (event, currentWeek) => {
  * @param {string} targetDay -        The target day for which lessons information is required.
  *
  * @param {boolean} shouldShiftWeek - Flag defining today is Sunday and the user has clicked the 'Schedule for tomorrow' button
- *
- * @returns {string} - 		          A formatted string containing lesson information for the specified day.
+ * @param {unknown} scheduleData
  */
-export const getLessonsInfo = (targetDay, shouldShiftWeek) => {
-	// Find information about the lessons for the specified day
-	const lessonToday = dataBase.find(({ day, events }) => day === targetDay && events)
-	// If no lesson information is found for the specified day, return an error message
-	if (!lessonToday) return MESSAGE
-	// Get the current day of the week
-	const getNumberWeek = getWeek(new Date())
-	const currentWeek = shouldShiftWeek ? getNumberWeek + 1 : getNumberWeek
-	// Format lesson information for the specified day
+// eslint-disable-next-line max-len
+export const getLessonsInfo = (targetDay, shouldShiftWeek = false, scheduleData = dataBase, weekNumber = getWeekNumber(new Date())) => {
+	// TODO: Remove assigning default value to scheduleData
+	const lessonToday = scheduleData.find(({ day, events }) => day === targetDay && events)
+	if (!lessonToday) return NO_LESSONS_MESSAGE
+
+	const currentWeek = shouldShiftWeek ? weekNumber + 1 : weekNumber
+
 	const formattedLessons = lessonToday.events
-		// Iterate through all lessons for the specified day
 		.map(event => {
 			const lessonType = getLessonType(event, currentWeek)
 			return lessonType ? getFormatLessons(lessonType, event) : null
 		})
-		// Remove all null values that may have occurred if the lesson type was not determined
 		.filter(info => info !== null)
-		// Concatenate the formatted lesson information into a single string
 		.join(' ')
 
-	// If all lessons returned null, return MESSAGE
-	if (!formattedLessons) return MESSAGE
+	if (!formattedLessons) return NO_LESSONS_MESSAGE
 
 	return formattedLessons
 }
@@ -91,11 +78,6 @@ export const getLessonsInfo = (targetDay, shouldShiftWeek) => {
  * @param {number} shiftDay -         The shift for the 'Schedule for tomorrow' button.
  *                            		  Positive value shifts the schedule forward, negative value shifts it backward.
  *                            		  Default is 0, representing the current day.
- *
- * @param {boolean} shouldShiftWeek - Specifies whether to shift a week forward if today is Sunday.
- *									  Shift only works if today is Sunday and shiftDay === 1
- *
- * @returns {string} - 				  The formatted string containing lesson information for the specified day.
  */
 export const getDayOfWeek = (shiftDay = 0) => {
 	const date = new Date()
@@ -106,23 +88,19 @@ export const getDayOfWeek = (shiftDay = 0) => {
 	let shouldShiftWeek = false
 	if (currentDay === 0 && shiftDay === 1) shouldShiftWeek = true
 	// Retrieve the schedule for the specified day based on the day index
-	return getLessonsInfo(DAY_OF_WEEK[dayIndex], shouldShiftWeek)
+	return getLessonsInfo(orderedWeekDays[dayIndex], shouldShiftWeek)
 }
 /**
  * Function to get the weekly schedule.
- * @param {number} shiftWeek - Shift of the week
+ * @param {boolean} shiftWeek - Shift of the week
  * @returns {string} - Line with the full weekly schedule
  */
-export const getScheduleWeek = shiftWeek => {
-	// Filter the days of the week, excluding Sunday and Saturday,
-	// then convert each day of the week into a string with its schedule.
-	const scheduleWeek = DAY_OF_WEEK.filter(element => element !== 'Sunday' && element !== 'Saturday').map(element => {
-		// Get information about classes for the current day of the week
-		// and delete extra spaces from the beginning and end of the string.
-		const dayOfWeek = getLessonsInfo(element, shiftWeek).trim()
-		// Return a string with information about the day of the week and its schedule.
-		return `\n🛑 <b>${element}</b>:\n\n ${dayOfWeek}\n`
-	})
-	// Combine the rows with the schedule for each day of the week into a single row and return the result.
+export const getWeekSchedule = shiftWeek => {
+	const scheduleWeek = orderedWeekDays
+		.filter(element => element !== 'Sunday' && element !== 'Saturday')
+		.map(element => {
+			const dayOfWeek = getLessonsInfo(element, shiftWeek).trim()
+			return `\n🛑 <b>${element}</b>:\n\n ${dayOfWeek}\n`
+		})
 	return scheduleWeek.join('')
 }

@@ -1,5 +1,5 @@
-import { weekdaySelector, createUrlBtn } from '../keyboards/keyboards.js'
-import { getDayOfWeek } from './scheduleHandler.js'
+import { weekdaySelector, createUrlBtn } from '../buttons/keyboards.js'
+import { getDayOfWeek } from '../utils/scheduleHandler.js'
 
 export const handlerReplyBtn = {
 	getScheduleToday: ctx => {

@@ -1,4 +1,4 @@
-import { isWeekEven } from '../../src/components/definitionOfWeek'
+import { isWeekEven } from '../../src/utils/getWeekNumber'
 
 describe('isWeekEven function', () => {
 	it('returns true if the week number is even (given the offset)', () => {

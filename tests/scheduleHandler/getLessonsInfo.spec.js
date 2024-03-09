@@ -1,4 +1,4 @@
-import { getLessonsInfo } from '../../src/components/handlers/scheduleHandler'
+import { getLessonsInfo } from '../../src/utils/scheduleHandler'
 
 describe('Works when today is weekend day', () => {
 	it('Returns no lessons message for Sunday', () => {

@@ -1,4 +1,5 @@
 import { isWeekEven } from '../../src/components/definitionOfWeek'
+import { describe, it, expect } from 'vitest'
 
 describe('isWeekEven function', () => {
 	it('returns true if the week number is even (given the offset)', () => {

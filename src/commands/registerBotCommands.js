@@ -1,8 +1,8 @@
 import { greetingMessage } from '../greetings.js'
 import { getMainMenu, createUrlBtn } from '../components/keyboards/keyboards.js'
-import { getWeek, isWeekEven } from '../components/definitionOfWeek.js'
+import { getWeekNumber, isWeekEven } from '../components/definitionOfWeek.js'
 import { contactInfo } from '../contactMe.js'
-import { getScheduleWeek } from '../components/handlers/scheduleHandler.js'
+import { getWeekSchedule } from '../components/handlers/scheduleHandler.js'
 
 /** @param {import('telegraf').Telegraf} bot*/
 export default bot => {
@@ -13,15 +13,16 @@ export default bot => {
 		const greetingName = userName || pseudonym
 		ctx.reply(`Привет, ${greetingName}!\n${greetingMessage}`, getMainMenu())
 	}
-	const getWeekScheduleHandler = shiftWeek => {
+	/** @param {boolean} shiftWeek */
+	const getWeekScheduleHandler = (shiftWeek = false) => {
 		return ctx => {
-			ctx.replyWithHTML(getScheduleWeek(shiftWeek), createUrlBtn())
+			ctx.replyWithHTML(getWeekSchedule(shiftWeek), createUrlBtn())
 		}
 	}
 	const getWeekInfoHandler = ctx => {
 		const date = new Date()
 		const week = isWeekEven(date) ? 'Четная' : 'Нечетная'
-		ctx.replyWithHTML(`📆Сейчас <b>${week}</b> неделя\n📆Номер недели: <b>${getWeek(new Date())}</b>`)
+		ctx.replyWithHTML(`📆Сейчас <b>${week}</b> неделя\n📆Номер недели: <b>${getWeekNumber(new Date())}</b>`)
 	}
 	const getSupportHandler = ctx => ctx.reply(contactInfo)
 
@@ -29,7 +30,7 @@ export default bot => {
 		{ command: 'start', handler: startHandler, description: 'Запустить бота' },
 		{ command: 'week', handler: getWeekInfoHandler, description: 'Какая сейчас неделя' },
 		{ command: 'week_schedule', handler: getWeekScheduleHandler(), description: 'Расписание на эту неделю' },
-		{ command: 'next_week_schedule', handler: getWeekScheduleHandler(1), description: 'Расписание на следующую неделю' },
+		{ command: 'next_week_schedule', handler: getWeekScheduleHandler(true), description: 'Расписание на следующую неделю' },
 		{ command: 'support', handler: getSupportHandler, description: 'Написать в поддержку' },
 	]
 

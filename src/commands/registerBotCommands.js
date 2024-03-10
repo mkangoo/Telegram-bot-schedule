@@ -1,8 +1,8 @@
-import { greetingMessage } from '../greetings.js'
-import { getMainMenu, createUrlBtn } from '../components/keyboards/keyboards.js'
-import { getWeekNumber, isWeekEven } from '../components/definitionOfWeek.js'
-import { contactInfo } from '../contactMe.js'
-import { getWeekSchedule } from '../components/handlers/scheduleHandler.js'
+import { greetingMessage, contactInfo } from './replyTemplates.js'
+import { createUrlBtn } from '../buttons/keyboards.js'
+import { getMainMenu } from '../inlineKeyboard/inlineKeyboard.js'
+import { getWeekNumber, isWeekEven } from '../utils/getWeekNumber.js'
+import { getWeekSchedule } from '../utils/scheduleHandler.js'
 
 /** @param {import('telegraf').Telegraf} bot*/
 export default bot => {

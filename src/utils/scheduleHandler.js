@@ -1,5 +1,5 @@
-import { getWeekNumber } from '../definitionOfWeek.js'
-import { dataBase } from '../../data/database.js'
+import { getWeekNumber } from './getWeekNumber.js'
+import { dataBase } from '../../data/schedule.js'
 
 const orderedWeekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 const NO_LESSONS_MESSAGE = '<b>🎉 Занятий нет, можно отдыхать.</b>'
@@ -97,10 +97,10 @@ export const getDayOfWeek = (shiftDay = 0) => {
  */
 export const getWeekSchedule = shiftWeek => {
 	const scheduleWeek = orderedWeekDays
-		.filter(element => element !== 'Sunday' && element !== 'Saturday')
-		.map(element => {
-			const dayOfWeek = getLessonsInfo(element, shiftWeek).trim()
-			return `\n🛑 <b>${element}</b>:\n\n ${dayOfWeek}\n`
+		.filter(day => day !== 'Sunday' && day !== 'Saturday')
+		.map(day => {
+			const dayOfWeek = getLessonsInfo(day, shiftWeek).trim()
+			return `\n🛑 <b>${day}</b>:\n\n ${dayOfWeek}\n`
 		})
 	return scheduleWeek.join('')
 }

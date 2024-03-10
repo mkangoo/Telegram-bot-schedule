@@ -1,8 +1,8 @@
 import { Telegraf } from 'telegraf'
 import 'dotenv/config'
 
-import { handlerReplyBtn, addButtonAction } from './components/handlers/buttonHandler.js'
-import { getLessonsInfo } from './components/handlers/scheduleHandler.js'
+import { handlerReplyBtn, addButtonAction } from './handlers/buttonHandler.js'
+import { getLessonsInfo } from './utils/scheduleHandler.js'
 import registerBotCommands from './commands/registerBotCommands.js'
 
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN, { polling: true })

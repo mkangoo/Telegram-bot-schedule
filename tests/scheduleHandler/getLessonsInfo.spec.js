@@ -1,4 +1,4 @@
-import { getLessonsInfo } from '../../src/components/handlers/scheduleHandler'
+import { getLessonsInfo } from '../../src/utils/scheduleHandler'
 import { describe, it, expect } from 'vitest'
 
 describe('Works when today is weekend day', () => {

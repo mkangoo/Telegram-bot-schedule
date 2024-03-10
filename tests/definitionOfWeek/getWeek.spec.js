@@ -1,4 +1,4 @@
-import { getWeekNumber } from '../../src/components/definitionOfWeek'
+import { getWeekNumber } from '../../src/utils/getWeekNumber'
 import { describe, it, expect } from 'vitest'
 
 describe('getWeek function', () => {

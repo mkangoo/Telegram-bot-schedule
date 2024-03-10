@@ -1,4 +1,4 @@
-import { getLessonType } from '../../src/components/handlers/scheduleHandler'
+import { getLessonType } from '../../src/utils/scheduleHandler'
 import { describe, it, expect } from 'vitest'
 
 describe('getLessonType function', () => {

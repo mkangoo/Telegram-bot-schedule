@@ -1,9 +1,5 @@
 import { Markup } from 'telegraf'
 
-export const getMainMenu = () => {
-	return Markup.keyboard([['Сегодня', 'Завтра'], ['Текущая неделя'], ['Следующая неделя']]).resize()
-}
-
 export const weekdaySelector = btnNextWeek => {
 	return Markup.inlineKeyboard([
 		[Markup.button.callback('Понедельник', btnNextWeek ? 'btnMonNextWeek' : 'btnMon')],

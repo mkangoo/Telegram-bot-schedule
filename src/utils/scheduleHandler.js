@@ -1,5 +1,5 @@
-import { getWeekNumber } from '../../utils/getWeekNumber.js'
-import { dataBase } from '../../../data/schedule.js'
+import { getWeekNumber } from './getWeekNumber.js'
+import { dataBase } from '../../data/schedule.js'
 
 const orderedWeekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 const NO_LESSONS_MESSAGE = '<b>🎉 Занятий нет, можно отдыхать.</b>'

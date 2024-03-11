@@ -1,5 +1,4 @@
 import { isCurrentWeekEven } from '../../src/utils/isCurrentWeekEven'
-import { describe, it, expect } from 'vitest'
 
 describe('isCurrentWeekEven function', () => {
 	it('returns true if the week number is even (given the offset)', () => {

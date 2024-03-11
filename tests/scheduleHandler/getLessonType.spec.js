@@ -1,5 +1,4 @@
-import { getLessonType } from '../../src/utils/lessonType.js'
-import { describe, it, expect } from 'vitest'
+import { getLessonType } from "../../src/utils/lessonType"
 
 describe('getLessonType function', () => {
 	it('should return "Лекция" if the current week is in the lection array', () => {

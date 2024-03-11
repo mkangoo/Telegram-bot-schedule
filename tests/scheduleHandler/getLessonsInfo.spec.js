@@ -1,4 +1,5 @@
 import { getLessonsInfo } from '../../src/utils/scheduleHandler'
+import { describe, it, expect } from 'vitest'
 
 describe('Works when today is weekend day', () => {
 	it('Returns no lessons message for Sunday', () => {

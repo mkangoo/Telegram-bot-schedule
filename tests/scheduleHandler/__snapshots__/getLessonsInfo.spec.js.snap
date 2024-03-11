@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Works when today is weekday Works for weekday 1`] = `
+exports[`Works when today is weekday > Works for weekday 1`] = `
 "
 
 ⏰ 09:55 - 11:25

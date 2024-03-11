@@ -1,5 +1,4 @@
 import { getLessonType } from '../../src/utils/scheduleHandler'
-import { describe, it, expect } from 'vitest'
 
 describe('getLessonType function', () => {
 	it('should return "Лекция" if the current week is in the lection array', () => {

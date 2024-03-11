@@ -1,5 +1,4 @@
 import { getWeekNumber } from '../../src/utils/getWeekNumber'
-import { describe, it, expect } from 'vitest'
 
 describe('getWeek function', () => {
 	it(`Testing the getWeek function. Expecting to receive the number of the day of the week.

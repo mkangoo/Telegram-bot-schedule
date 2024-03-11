@@ -1,9 +1,9 @@
 import { Telegraf } from 'telegraf'
 import 'dotenv/config'
 
-import { handlerReplyBtn, addButtonAction } from './handlers/buttonHandler.js'
-import { getLessonsInfo } from './utils/scheduleHandler.js'
+import inlineKeyboardHandler from './inlineKeyboard/inlineKeyboardHandler.js'
 import registerBotCommands from './commands/registerBotCommands.js'
+import buttonHandler from './buttons/buttonsHandler.js'
 import { descriptionMessage } from './commands/replyTemplates.js'
 
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN, { polling: true })
@@ -12,25 +12,9 @@ bot.telegram.setMyDescription(descriptionMessage)
 
 registerBotCommands(bot)
 
-bot.hears('Сегодня', handlerReplyBtn.getScheduleToday)
+buttonHandler(bot)
 
-bot.hears('Завтра', handlerReplyBtn.getScheduleForTomorrow)
-
-bot.hears('Текущая неделя', handlerReplyBtn.getScheduleWeek)
-
-bot.hears('Следующая неделя', handlerReplyBtn.getScheduleNextWeek)
-
-addButtonAction(bot, 'btnMon', getLessonsInfo('Monday'))
-addButtonAction(bot, 'btnTue', getLessonsInfo('Tuesday'))
-addButtonAction(bot, 'btnWed', getLessonsInfo('Wednesday'))
-addButtonAction(bot, 'btnThu', getLessonsInfo('Thursday'))
-addButtonAction(bot, 'btnFri', getLessonsInfo('Friday'))
-
-addButtonAction(bot, 'btnMonNextWeek', getLessonsInfo('Monday', true))
-addButtonAction(bot, 'btnTueNextWeek', getLessonsInfo('Tuesday', true))
-addButtonAction(bot, 'btnWedNextWeek', getLessonsInfo('Wednesday', true))
-addButtonAction(bot, 'btnThuNextWeek', getLessonsInfo('Thursday', true))
-addButtonAction(bot, 'btnFriNextWeek', getLessonsInfo('Friday', true))
+inlineKeyboardHandler(bot)
 
 bot.launch()
 

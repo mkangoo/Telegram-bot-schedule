@@ -1,4 +1,4 @@
-import { getWeekNumber } from '../../src/utils/getWeekNumber'
+import { getWeekNumber } from '../../src/utils/weekNumber'
 import { describe, it, expect } from 'vitest'
 
 describe('getWeek function', () => {

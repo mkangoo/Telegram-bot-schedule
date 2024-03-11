@@ -1,4 +1,4 @@
-import { getLessonType } from '../../src/utils/scheduleHandler'
+import { getLessonType } from '../../src/utils/lessonType'
 import { describe, it, expect } from 'vitest'
 
 describe('getLessonType function', () => {

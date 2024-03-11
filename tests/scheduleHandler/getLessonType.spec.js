@@ -1,4 +1,4 @@
-import { getLessonType } from '../../src/utils/lessonType'
+import { getLessonType } from '../../src/utils/lessonType.js'
 import { describe, it, expect } from 'vitest'
 
 describe('getLessonType function', () => {

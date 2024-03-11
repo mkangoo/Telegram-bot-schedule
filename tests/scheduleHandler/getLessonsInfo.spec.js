@@ -1,12 +1,13 @@
-import { getLessonsInfo } from '../../src/utils/scheduleHandler'
+import { dataBase } from '../../data/schedule.js'
+import { getLessonsInfo } from '../../src/utils/scheduleHandler.js'
 import { describe, it, expect } from 'vitest'
 
 describe('Works when today is weekend day', () => {
 	it('Returns no lessons message for Sunday', () => {
-		expect(getLessonsInfo('Sunday', false)).toEqual('<b>🎉 Занятий нет, можно отдыхать.</b>')
+		expect(getLessonsInfo('Sunday', dataBase)).toEqual('<b>🎉 Занятий нет, можно отдыхать.</b>')
 	})
 	it('Returns no lessons for Saturday', () => {
-		expect(getLessonsInfo('Saturday', false)).toEqual('<b>🎉 Занятий нет, можно отдыхать.</b>')
+		expect(getLessonsInfo('Saturday', dataBase)).toEqual('<b>🎉 Занятий нет, можно отдыхать.</b>')
 	})
 })
 describe('Works when today is weekday', () => {
@@ -46,6 +47,6 @@ describe('Works when today is weekday', () => {
 		},
 	]
 	it('Works for weekday', () => {
-		expect(getLessonsInfo(WEEK_DAY, false, MOCK_SCHEDULE_DATA, 4)).toMatchSnapshot()
+		expect(getLessonsInfo(WEEK_DAY, MOCK_SCHEDULE_DATA, false, 4)).toMatchSnapshot()
 	})
 })

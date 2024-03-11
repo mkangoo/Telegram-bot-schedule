@@ -1,5 +1,5 @@
 import { dataBase } from '../../data/schedule.js'
-import { getLessonsInfo } from '../../src/utils/scheduleHandler.js'
+import { getLessonsInfo } from '../../src/utils/scheduleHandler'
 import { describe, it, expect } from 'vitest'
 
 describe('Works when today is weekend day', () => {

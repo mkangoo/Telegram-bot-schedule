@@ -1,3 +1,4 @@
+import { dataBase } from '../../data/schedule.js'
 import { getLessonsInfo } from '../utils/scheduleHandler.js'
 import { createUrlBtn } from './createBotButtons.js'
 
@@ -18,7 +19,7 @@ export default async bot => {
 	}
 
 	orderedWeekDays.forEach(day => {
-		addButtonAction(bot, `btn${day}`, getLessonsInfo(day))
-		addButtonAction(bot, `btn${day}NextWeek`, getLessonsInfo(day, true))
+		addButtonAction(bot, `btn${day}`, getLessonsInfo(day, dataBase, false))
+		addButtonAction(bot, `btn${day}NextWeek`, getLessonsInfo(day, dataBase, true))
 	})
 }

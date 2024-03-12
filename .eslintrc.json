@@ -20,6 +20,9 @@
 		"max-len": ["error", 130],
 		"import/prefer-default-export": "off",
 		"no-nested-ternary": "off",
+		"no-unused-expressions": "off",
+		"no-param-reassign": "off",
+		"no-shadow": "off",
 		"import/extensions": [
 			"error",
 			"ignorePackages",

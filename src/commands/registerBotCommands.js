@@ -1,9 +1,9 @@
-import { greetingMessage, contactInfo } from './replyTemplates.js'
 import { createUrlBtn } from '../buttons/createBotButtons.js'
 import { getInlineKeyboard } from '../inlineKeyboard/createInlineKeyboard.js'
-import { getWeekNumber } from '../utils/weekNumber.js'
 import { isCurrentWeekEven } from '../utils/isCurrentWeekEven.js'
 import { getFullSchedule } from '../utils/scheduleOutput.js'
+import { getWeekNumber } from '../utils/weekNumber.js'
+import { contactInfo, greetingMessage } from './replyTemplates.js'
 
 /** @param {import('telegraf').Telegraf} bot*/
 export default async bot => {

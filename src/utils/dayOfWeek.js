@@ -1,6 +1,6 @@
-import { getLessonsForDay } from './scheduleOutput.js'
-import { orderedWeekDays } from './constant.js'
 import { dataBase } from '../../data/schedule.js'
+import { orderedWeekDays } from './constant.js'
+import { getLessonsForDay } from './scheduleOutput.js'
 
 /**
  * Retrieves the schedule for a specific day, considering a shift if necessary.

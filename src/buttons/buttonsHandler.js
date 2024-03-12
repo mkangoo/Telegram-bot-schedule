@@ -1,7 +1,7 @@
 import { dataBase } from '../../data/schedule.js'
+import { orderedWeekDays } from '../utils/constant.js'
 import { getLessonsForDay } from '../utils/scheduleOutput.js'
 import { createUrlBtn } from './createBotButtons.js'
-import { orderedWeekDays } from '../utils/constant.js'
 
 export default async bot => {
 	const addButtonAction = async (bot, button, schedule) => {

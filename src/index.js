@@ -1,10 +1,10 @@
-import { Telegraf } from 'telegraf'
 import 'dotenv/config'
+import { Telegraf } from 'telegraf'
 
-import inlineKeyboardHandler from './inlineKeyboard/inlineKeyboardHandler.js'
-import registerBotCommands from './commands/registerBotCommands.js'
 import buttonHandler from './buttons/buttonsHandler.js'
+import registerBotCommands from './commands/registerBotCommands.js'
 import { descriptionMessage } from './commands/replyTemplates.js'
+import inlineKeyboardHandler from './inlineKeyboard/inlineKeyboardHandler.js'
 
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN, { polling: true })
 

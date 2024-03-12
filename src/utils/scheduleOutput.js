@@ -1,8 +1,8 @@
 // eslint-disable-next-line import/no-cycle
-import { orderedWeekDays, NO_LESSONS_MESSAGE } from './constant.js'
+import { dataBase } from '../../data/schedule.js'
+import { NO_LESSONS_MESSAGE, orderedWeekDays } from './constant.js'
 import { getLessonType } from './lessonType.js'
 import { getWeekNumber } from './weekNumber.js'
-import { dataBase } from '../../data/schedule.js'
 
 /**
  * Formats the lesson information for display to the user.

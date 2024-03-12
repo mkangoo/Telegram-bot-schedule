@@ -1,5 +1,6 @@
+import { getLessonsForDay } from './scheduleOutput.js'
+import { orderedWeekDays } from './constant.js'
 import { dataBase } from '../../data/schedule.js'
-import { orderedWeekDays, getLessonsInfo } from './scheduleHandler.js'
 
 /**
  * Retrieves the schedule for a specific day, considering a shift if necessary.
@@ -19,5 +20,5 @@ export const getDayOfWeek = (shiftDay = 0) => {
 	let shouldShiftWeek = false
 	if (currentDay === 0 && shiftDay === 1) shouldShiftWeek = true
 	// Retrieve the schedule for the specified day based on the day index
-	return getLessonsInfo(orderedWeekDays[dayIndex], dataBase, shouldShiftWeek)
+	return getLessonsForDay(orderedWeekDays[dayIndex], dataBase, shouldShiftWeek)
 }

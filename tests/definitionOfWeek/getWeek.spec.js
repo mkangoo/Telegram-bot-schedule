@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 import { getWeekNumber } from '../../src/utils/weekNumber'
-import { describe, it, expect } from 'vitest'
-=======
-import { getWeekNumber } from '../../src/utils/getWeekNumber'
->>>>>>> parent of f4ad0dd (Fixes #16: Migrate to vitest)
 
 describe('getWeek function', () => {
 	it(`Testing the getWeek function. Expecting to receive the number of the day of the week.

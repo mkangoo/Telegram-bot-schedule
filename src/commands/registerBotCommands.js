@@ -3,7 +3,7 @@ import { createUrlBtn } from '../buttons/createBotButtons.js'
 import { getInlineKeyboard } from '../inlineKeyboard/createInlineKeyboard.js'
 import { getWeekNumber } from '../utils/weekNumber.js'
 import { isCurrentWeekEven } from '../utils/isCurrentWeekEven.js'
-import { getWeekSchedule } from '../utils/scheduleHandler.js'
+import { getFullSchedule } from '../utils/scheduleOutput.js'
 
 /** @param {import('telegraf').Telegraf} bot*/
 export default async bot => {
@@ -17,7 +17,7 @@ export default async bot => {
 	/** @param {boolean} shiftWeek */
 	const getWeekScheduleHandler = (shiftWeek = false) => {
 		return ctx => {
-			ctx.replyWithHTML(getWeekSchedule(shiftWeek), createUrlBtn())
+			ctx.replyWithHTML(getFullSchedule(shiftWeek), createUrlBtn())
 		}
 	}
 	const getWeekInfoHandler = ctx => {

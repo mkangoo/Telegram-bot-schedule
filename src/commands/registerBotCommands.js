@@ -1,27 +1,28 @@
 import { greetingMessage, contactInfo } from './replyTemplates.js'
-import { createUrlBtn } from '../buttons/keyboards.js'
-import { getMainMenu } from '../inlineKeyboard/inlineKeyboard.js'
-import { getWeekNumber, isWeekEven } from '../utils/getWeekNumber.js'
-import { getWeekSchedule } from '../utils/scheduleHandler.js'
+import { createUrlBtn } from '../buttons/createBotButtons.js'
+import { getInlineKeyboard } from '../inlineKeyboard/createInlineKeyboard.js'
+import { getWeekNumber } from '../utils/weekNumber.js'
+import { isCurrentWeekEven } from '../utils/isCurrentWeekEven.js'
+import { getFullSchedule } from '../utils/scheduleOutput.js'
 
 /** @param {import('telegraf').Telegraf} bot*/
-export default bot => {
+export default async bot => {
 	const startHandler = ctx => {
 		const user = ctx.from
 		const userName = user.first_name
 		const pseudonym = user.username
 		const greetingName = userName || pseudonym
-		ctx.reply(`Привет, ${greetingName}!\n${greetingMessage}`, getMainMenu())
+		ctx.reply(`Привет, ${greetingName}!\n${greetingMessage}`, getInlineKeyboard())
 	}
 	/** @param {boolean} shiftWeek */
 	const getWeekScheduleHandler = (shiftWeek = false) => {
 		return ctx => {
-			ctx.replyWithHTML(getWeekSchedule(shiftWeek), createUrlBtn())
+			ctx.replyWithHTML(getFullSchedule(shiftWeek), createUrlBtn())
 		}
 	}
 	const getWeekInfoHandler = ctx => {
 		const date = new Date()
-		const week = isWeekEven(date) ? 'Четная' : 'Нечетная'
+		const week = isCurrentWeekEven(date) ? 'Четная' : 'Нечетная'
 		ctx.replyWithHTML(`📆Сейчас <b>${week}</b> неделя\n📆Номер недели: <b>${getWeekNumber(new Date())}</b>`)
 	}
 	const getSupportHandler = ctx => ctx.reply(contactInfo)

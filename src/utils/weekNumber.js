@@ -20,5 +20,3 @@ export const getWeekNumber = date => {
 	}
 	return calculateWeekNumber()
 }
-
-export const isWeekEven = date => getWeekNumber(date) % 2 === 0

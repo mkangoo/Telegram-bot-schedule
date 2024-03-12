@@ -1,4 +1,4 @@
-import { getWeekNumber } from '../../src/utils/getWeekNumber'
+import { getWeekNumber } from '../../src/utils/weekNumber'
 
 describe('getWeek function', () => {
 	it(`Testing the getWeek function. Expecting to receive the number of the day of the week.

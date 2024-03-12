@@ -65,5 +65,5 @@ export const getFullSchedule = shiftWeek => {
 			const scheduleDay = getLessonsForDay(day, dataBase, shiftWeek).trim()
 			return `\n🛑 <b>${day}</b>:\n\n ${scheduleDay}\n`
 		})
-	return scheduleWeek.join()
+	return scheduleWeek.join('')
 }

@@ -11,5 +11,8 @@ export const getButtonDaysOfWeek = btnNextWeek => {
 }
 
 export const createUrlBtn = () => {
-	return Markup.inlineKeyboard([[Markup.button.url('Проверить на сайте', 'https://guu.ru/student/schedule/')]])
+	return Markup.inlineKeyboard([
+		[Markup.button.url('Проверить на сайте', 'https://my.guu.ru/student/classes/mobile')],
+		[Markup.button.url('Скачать расписание', 'https://guu.ru/student/schedule/')],
+	])
 }

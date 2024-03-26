@@ -1,5 +1,5 @@
 import { dataBase } from '../../data/schedule.js'
-import { getLessonsForDay } from '../../src/utils/scheduleOutput.js'
+import { getLessonsForDay } from '../../src/core/schedule.js'
 
 describe('Works when today is weekend day', () => {
 	it('Returns no lessons message for Sunday', () => {

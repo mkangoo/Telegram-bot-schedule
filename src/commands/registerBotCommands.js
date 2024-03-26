@@ -3,7 +3,7 @@ import { createUrlBtn } from '../buttons/createBotButtons.js'
 import { getInlineKeyboard } from '../inlineKeyboard/createInlineKeyboard.js'
 import { getWeekNumber } from '../utils/weekNumber.js'
 import { isCurrentWeekEven } from '../utils/isCurrentWeekEven.js'
-import { getFullSchedule } from '../utils/scheduleOutput.js'
+import { getFullSchedule } from '../core/schedule.js'
 
 /** @param {import('telegraf').Telegraf} bot*/
 export default async bot => {

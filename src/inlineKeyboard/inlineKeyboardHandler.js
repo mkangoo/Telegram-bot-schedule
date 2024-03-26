@@ -1,4 +1,4 @@
-import { getDayOfWeek } from '../utils/dayOfWeek.js'
+import { getDayOfWeek } from '../core/schedule.js'
 import { createUrlBtn, getButtonDaysOfWeek } from '../buttons/createBotButtons.js'
 
 export default async bot => {

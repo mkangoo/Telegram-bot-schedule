@@ -50,7 +50,12 @@ const getDayIndex = date => {
 	date.setUTCHours(currentHours + 3)
 	const currentDay = date.getDay()
 	const dayIndex = currentDay % 7
-	return dayIndex
+	return dayIndex % 7
+}
+
+const holidayStatus = () => {
+	const dayIndex = getDayIndex(new Date())
+	return orderedWeekDays[dayIndex] === 'Sunday'
 }
 
 const getDayScheduleByOffset = () => {
@@ -64,5 +69,5 @@ export const getTodaySchedule = () => {
 
 export const getTomorrowSchedule = () => {
 	const dayIndex = getDayScheduleByOffset()
-	return getLessonsForDay(orderedWeekDays[dayIndex], dataBase, false)
+	return getLessonsForDay(orderedWeekDays[dayIndex], dataBase, { raw: holidayStatus() })
 }

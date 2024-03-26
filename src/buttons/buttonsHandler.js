@@ -17,7 +17,7 @@ export default async bot => {
 	}
 
 	orderedWeekDays.forEach(day => {
-		addButtonAction(bot, `btn${day}`, getLessonsForDay(day, dataBase, false))
-		addButtonAction(bot, `btn${day}NextWeek`, getLessonsForDay(day, dataBase, true))
+		addButtonAction(bot, `btn${day}`, getLessonsForDay(day, dataBase))
+		addButtonAction(bot, `btn${day}NextWeek`, getLessonsForDay(day, dataBase, { row: true }))
 	})
 }

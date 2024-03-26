@@ -1,6 +1,7 @@
 import { Markup } from 'telegraf'
 
-export const getButtonDaysOfWeek = btnNextWeek => {
+export const getButtonDaysOfWeek = dayOffset => {
+	const btnNextWeek = dayOffset.raw
 	return Markup.inlineKeyboard([
 		[Markup.button.callback('Понедельник', btnNextWeek ? 'btnMondayNextWeek' : 'btnMonday')],
 		[Markup.button.callback('Вторник', btnNextWeek ? 'btnTuesdayNextWeek' : 'btnTuesday')],

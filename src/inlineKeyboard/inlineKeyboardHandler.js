@@ -1,19 +1,19 @@
-import { getDayOfWeek } from '../core/schedule.js'
 import { createUrlBtn, getButtonDaysOfWeek } from '../buttons/createBotButtons.js'
+import { getTodaySchedule, getTomorrowSchedule } from '../core/schedule.js'
 
 export default async bot => {
 	const getHandlerInlineKeyboard = {
 		getScheduleToday: async ctx => {
-			ctx.replyWithHTML(await getDayOfWeek(), createUrlBtn())
+			ctx.replyWithHTML(await getTodaySchedule(), createUrlBtn())
 		},
 		getScheduleForTomorrow: async ctx => {
-			ctx.replyWithHTML(await getDayOfWeek(1), createUrlBtn())
+			ctx.replyWithHTML(await getTomorrowSchedule(), createUrlBtn())
 		},
 		getScheduleWeek: ctx => {
-			ctx.replyWithHTML('<b>Выберите день:</b>', getButtonDaysOfWeek())
+			ctx.replyWithHTML('<b>Выберите день:</b>', getButtonDaysOfWeek({ raw: false }))
 		},
 		getScheduleNextWeek: ctx => {
-			ctx.replyWithHTML('<b>Выберите день:</b>', getButtonDaysOfWeek(true))
+			ctx.replyWithHTML('<b>Выберите день:</b>', getButtonDaysOfWeek({ raw: true }))
 		},
 	}
 	// TODO: renaming variable

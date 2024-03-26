@@ -1,0 +1,14 @@
+{
+	"include": ["src/**/*"],
+	"compilerOptions": {
+		"noEmit": true,
+		"checkJs": true,
+		"allowJs": true,
+		"strict": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"module": "esnext",
+		"lib": ["esnext"],
+		"moduleResolution": "node"
+	}
+}

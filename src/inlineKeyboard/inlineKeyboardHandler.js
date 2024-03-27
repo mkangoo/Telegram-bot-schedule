@@ -10,13 +10,13 @@ export default async bot => {
 			ctx.replyWithHTML(await getTomorrowSchedule(), createUrlBtn())
 		},
 		getScheduleWeek: ctx => {
-			ctx.replyWithHTML('<b>Выберите день:</b>', getButtonDaysOfWeek({ raw: false }))
+			ctx.replyWithHTML('<b>Выберите день:</b>', getButtonDaysOfWeek({ weekOffset: false }))
 		},
 		getScheduleNextWeek: ctx => {
-			ctx.replyWithHTML('<b>Выберите день:</b>', getButtonDaysOfWeek({ raw: true }))
+			ctx.replyWithHTML('<b>Выберите день:</b>', getButtonDaysOfWeek({ weekOffset: true }))
 		},
 	}
-	// TODO: renaming variable
+
 	const orderedInline = [
 		{ command: 'Сегодня', handler: getHandlerInlineKeyboard.getScheduleToday },
 		{ command: 'Завтра', handler: getHandlerInlineKeyboard.getScheduleForTomorrow },

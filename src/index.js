@@ -4,11 +4,11 @@ import 'dotenv/config'
 import inlineKeyboardHandler from './inlineKeyboard/inlineKeyboardHandler.js'
 import registerBotCommands from './commands/registerBotCommands.js'
 import buttonHandler from './buttons/buttonsHandler.js'
-import { descriptionMessage } from './commands/replyTemplates.js'
+import registerBotSettings from './settings/settingsBot.js'
 
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN, { polling: true })
 
-bot.telegram.setMyDescription(descriptionMessage)
+registerBotSettings(bot)
 
 registerBotCommands(bot)
 

@@ -17,11 +17,13 @@ export const getScheduleOutput = (lessonType, { start, end, title, description, 
 	return `\n\n⏰ ${startTime} - ${endTime}\n${lessonType}:\n<b>${lessonTitle}</b>\n${lessonDescription}\n${audienceInfo}`
 }
 
-export function getLessonsForDay(targetDay, scheduleData, shouldShiftWeek, weekNumber = getWeekNumber(new Date())) {
+export function getLessonsForDay(targetDay, scheduleData, weekOffset, weekNumber = getWeekNumber(new Date())) {
+	const statusOffset = JSON.parse(Object.values(weekOffset).join())
+
 	const lessonToday = scheduleData.find(({ day, events }) => day === targetDay && events)
 	if (!lessonToday) return NO_LESSONS_MESSAGE
 
-	if (shouldShiftWeek) weekNumber += 1
+	if (statusOffset) weekNumber += 1
 
 	const formattedLessons = lessonToday.events
 		.map(event => {
@@ -30,7 +32,6 @@ export function getLessonsForDay(targetDay, scheduleData, shouldShiftWeek, weekN
 		})
 		.filter(info => info !== null)
 		.join(' ')
-
 	return formattedLessons || NO_LESSONS_MESSAGE
 }
 
@@ -61,17 +62,17 @@ const getDayIndex = () => {
 	}
 }
 
-const holidayStatus = () => {
+const sundayCheck = () => {
 	const dayIndex = getDayIndex().today()
 	return orderedWeekDays[dayIndex] === 'Sunday'
 }
 
 export const getTodaySchedule = () => {
 	const dayIndex = getDayIndex().today()
-	return getLessonsForDay(orderedWeekDays[dayIndex], dataBase)
+	return getLessonsForDay(orderedWeekDays[dayIndex], dataBase, { weekOffset: false })
 }
 
 export const getTomorrowSchedule = () => {
 	const dayIndex = getDayIndex().tomorrow()
-	return getLessonsForDay(orderedWeekDays[dayIndex], dataBase, { raw: holidayStatus() })
+	return getLessonsForDay(orderedWeekDays[dayIndex], dataBase, { weekOffset: sundayCheck() })
 }

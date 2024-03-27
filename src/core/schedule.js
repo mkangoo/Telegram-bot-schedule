@@ -44,30 +44,34 @@ export const getFullSchedule = shiftWeek => {
 	return scheduleWeek.join('')
 }
 
-const getDayIndex = date => {
-	const currentHours = date.getUTCHours()
-	// Time zone offset in Moscow
-	date.setUTCHours(currentHours + 3)
-	const currentDay = date.getDay()
-	const dayIndex = currentDay % 7
-	return dayIndex % 7
+const getDayIndex = () => {
+	return {
+		today() {
+			const date = new Date()
+			const currentHours = date.getUTCHours()
+			// Time zone offset in Moscow
+			date.setUTCHours(currentHours + 3)
+			const currentDay = date.getDay()
+			const dayIndex = currentDay % 7
+			return dayIndex % 7
+		},
+		tomorrow() {
+			return this.today() + 1
+		},
+	}
 }
 
 const holidayStatus = () => {
-	const dayIndex = getDayIndex(new Date())
+	const dayIndex = getDayIndex().today()
 	return orderedWeekDays[dayIndex] === 'Sunday'
 }
 
-const getDayScheduleByOffset = () => {
-	return getDayIndex(new Date()) + 1
-}
-
 export const getTodaySchedule = () => {
-	const dayIndex = getDayIndex(new Date())
+	const dayIndex = getDayIndex().today()
 	return getLessonsForDay(orderedWeekDays[dayIndex], dataBase)
 }
 
 export const getTomorrowSchedule = () => {
-	const dayIndex = getDayScheduleByOffset()
+	const dayIndex = getDayIndex().tomorrow()
 	return getLessonsForDay(orderedWeekDays[dayIndex], dataBase, { raw: holidayStatus() })
 }

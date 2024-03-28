@@ -30,15 +30,11 @@ export function getLessonsForDay(targetDay, scheduleData, weekNumber = getWeekNu
 	return formattedLessons || NO_LESSONS_MESSAGE
 }
 
-export const getFullSchedule = shiftWeek => {
+export const getFullSchedule = weekNumber => {
 	const scheduleWeek = orderedWeekDays
 		.filter(day => day !== 'Sunday' && day !== 'Saturday')
 		.map(day => {
-			const scheduleDay = getLessonsForDay(
-				day,
-				dataBase,
-				shiftWeek ? getWeekNumber(new Date()) + 1 : getWeekNumber(new Date()),
-			).trim()
+			const scheduleDay = getLessonsForDay(day, dataBase, weekNumber).trim()
 			return `\n🛑 <b>${day}</b>:\n\n ${scheduleDay}\n`
 		})
 	return scheduleWeek.join('')

@@ -16,10 +16,9 @@ export default async bot => {
 		ctx.reply(`Привет, ${greetingName}!\n${greetingMessage}`, getInlineKeyboard())
 	}
 
-	const getWeekScheduleHandler = shiftWeek => {
-		const { weekOffset } = shiftWeek
+	const getWeekScheduleHandler = weekNumber => {
 		return ctx => {
-			ctx.replyWithHTML(getFullSchedule(weekOffset), createUrlBtn())
+			ctx.replyWithHTML(getFullSchedule(weekNumber), createUrlBtn())
 		}
 	}
 
@@ -34,10 +33,10 @@ export default async bot => {
 	const commands = [
 		{ command: 'start', handler: startHandler, description: 'Запустить бота' },
 		{ command: 'week', handler: getWeekInfoHandler, description: 'Какая сейчас неделя' },
-		{ command: 'week_schedule', handler: getWeekScheduleHandler({ weekOffset: false }), description: 'Расписание на эту неделю' },
+		{ command: 'week_schedule', handler: getWeekScheduleHandler(getWeekNumber(new Date())), description: 'Расписание на эту неделю' },
 		{
 			command: 'next_week_schedule',
-			handler: getWeekScheduleHandler({ weekOffset: true }),
+			handler: getWeekScheduleHandler(getWeekNumber(new Date()) + 1),
 			description: 'Расписание на следующую неделю',
 		},
 		{ command: 'support', handler: getSupportHandler, description: 'Написать в поддержку' },

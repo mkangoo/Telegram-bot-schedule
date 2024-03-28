@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-cycle
 import { orderedWeekDays, NO_LESSONS_MESSAGE } from '../utils/constant.js'
 import { getLessonType } from '../utils/lessonType.js'
 import { getWeekNumber } from '../utils/weekNumber.js'
@@ -17,13 +16,12 @@ export const getScheduleOutput = (lessonType, { start, end, title, description, 
 	return `\n\n⏰ ${startTime} - ${endTime}\n${lessonType}:\n<b>${lessonTitle}</b>\n${lessonDescription}\n${audienceInfo}`
 }
 
-export function getLessonsForDay(targetDay, scheduleData, weekOffset, weekNumber = getWeekNumber(new Date())) {
-	const statusOffset = JSON.parse(Object.values(weekOffset).join())
-
+export function getLessonsForDay(targetDay, scheduleData, statusOffset, weekNumber = getWeekNumber(new Date())) {
 	const lessonToday = scheduleData.find(({ day, events }) => day === targetDay && events)
 	if (!lessonToday) return NO_LESSONS_MESSAGE
 
-	if (statusOffset) weekNumber += 1
+	const { weekOffset } = statusOffset
+	if (weekOffset) weekNumber += 1
 
 	const formattedLessons = lessonToday.events
 		.map(event => {
@@ -45,34 +43,30 @@ export const getFullSchedule = shiftWeek => {
 	return scheduleWeek.join('')
 }
 
-const getDayIndex = () => {
-	return {
-		today() {
-			const date = new Date()
-			const currentHours = date.getUTCHours()
-			// Time zone offset in Moscow
-			date.setUTCHours(currentHours + 3)
-			const currentDay = date.getDay()
-			const dayIndex = currentDay % 7
-			return dayIndex % 7
-		},
-		tomorrow() {
-			return this.today() + 1
-		},
-	}
+const getTodayIndex = date => {
+	const currentHours = date.getUTCHours()
+	// Time zone offset in Moscow
+	date.setUTCHours(currentHours + 3)
+	const currentDay = date.getDay()
+	const dayIndex = currentDay % 7
+	return dayIndex % 7
 }
 
-const sundayCheck = () => {
-	const dayIndex = getDayIndex().today()
+const getTomorrowIndex = () => {
+	return getTodayIndex(new Date()) + 1
+}
+
+const checkIsSunday = dayIndex => {
 	return orderedWeekDays[dayIndex] === 'Sunday'
 }
 
 export const getTodaySchedule = () => {
-	const dayIndex = getDayIndex().today()
+	const dayIndex = getTodayIndex(new Date())
 	return getLessonsForDay(orderedWeekDays[dayIndex], dataBase, { weekOffset: false })
 }
 
 export const getTomorrowSchedule = () => {
-	const dayIndex = getDayIndex().tomorrow()
-	return getLessonsForDay(orderedWeekDays[dayIndex], dataBase, { weekOffset: sundayCheck() })
+	const lastDayIndex = getTomorrowIndex()
+	const checkOnSunday = checkIsSunday(getTodayIndex(new Date()))
+	return getLessonsForDay(orderedWeekDays[lastDayIndex], dataBase, { weekOffset: checkOnSunday })
 }

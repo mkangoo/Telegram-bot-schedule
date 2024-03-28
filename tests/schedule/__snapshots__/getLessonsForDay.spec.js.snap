@@ -16,7 +16,7 @@ exports[`Works when today is weekday > Works for weekday 1`] = `
 ЛК - 402"
 `;
 
-exports[`Works when today is weekday Works for weekday 1`] = `
+exports[`Works when today is weekday > Works for weekday 2`] = `
 "
 
 ⏰ 09:55 - 11:25
@@ -26,6 +26,12 @@ exports[`Works when today is weekday Works for weekday 1`] = `
 ЛК - 402 
 
 ⏰ 11:35 - 13:05
+Практика:
+<b>Управление развитием инновационного продукта</b>
+Дегтярёва В.В.
+ЛК - 402 
+
+⏰ 13:45 - 15:15
 Практика:
 <b>Управление развитием инновационного продукта</b>
 Дегтярёва В.В.

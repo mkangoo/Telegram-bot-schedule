@@ -3,9 +3,10 @@ import { createUrlBtn } from '../buttons/createBotButtons.js'
 import { getInlineKeyboard } from '../inlineKeyboard/createInlineKeyboard.js'
 import { getWeekNumber } from '../utils/weekNumber.js'
 import { isCurrentWeekEven } from '../utils/isCurrentWeekEven.js'
-import { getFullSchedule } from '../utils/scheduleOutput.js'
+import { getFullSchedule } from '../core/schedule.js'
 
 /** @param {import('telegraf').Telegraf} bot*/
+
 export default async bot => {
 	const startHandler = ctx => {
 		const user = ctx.from
@@ -14,24 +15,30 @@ export default async bot => {
 		const greetingName = userName || pseudonym
 		ctx.reply(`Привет, ${greetingName}!\n${greetingMessage}`, getInlineKeyboard())
 	}
-	/** @param {boolean} shiftWeek */
-	const getWeekScheduleHandler = (shiftWeek = false) => {
+
+	const getWeekScheduleHandler = weekNumber => {
 		return ctx => {
-			ctx.replyWithHTML(getFullSchedule(shiftWeek), createUrlBtn())
+			ctx.replyWithHTML(getFullSchedule(weekNumber), createUrlBtn())
 		}
 	}
+
 	const getWeekInfoHandler = ctx => {
 		const date = new Date()
 		const week = isCurrentWeekEven(date) ? 'Четная' : 'Нечетная'
 		ctx.replyWithHTML(`📆Сейчас <b>${week}</b> неделя\n📆Номер недели: <b>${getWeekNumber(new Date())}</b>`)
 	}
+
 	const getSupportHandler = ctx => ctx.reply(contactInfo)
 
 	const commands = [
 		{ command: 'start', handler: startHandler, description: 'Запустить бота' },
 		{ command: 'week', handler: getWeekInfoHandler, description: 'Какая сейчас неделя' },
-		{ command: 'week_schedule', handler: getWeekScheduleHandler(), description: 'Расписание на эту неделю' },
-		{ command: 'next_week_schedule', handler: getWeekScheduleHandler(true), description: 'Расписание на следующую неделю' },
+		{ command: 'week_schedule', handler: getWeekScheduleHandler(getWeekNumber(new Date())), description: 'Расписание на эту неделю' },
+		{
+			command: 'next_week_schedule',
+			handler: getWeekScheduleHandler(getWeekNumber(new Date()) + 1),
+			description: 'Расписание на следующую неделю',
+		},
 		{ command: 'support', handler: getSupportHandler, description: 'Написать в поддержку' },
 	]
 

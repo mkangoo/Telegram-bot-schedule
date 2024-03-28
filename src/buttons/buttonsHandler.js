@@ -1,7 +1,8 @@
 import { dataBase } from '../../data/schedule.js'
-import { getLessonsForDay } from '../utils/scheduleOutput.js'
+import { getLessonsForDay } from '../core/schedule.js'
 import { createUrlBtn } from './createBotButtons.js'
 import { orderedWeekDays } from '../utils/constant.js'
+import { getWeekNumber } from '../utils/weekNumber.js'
 
 export default async bot => {
 	const addButtonAction = async (bot, button, schedule) => {
@@ -17,7 +18,7 @@ export default async bot => {
 	}
 
 	orderedWeekDays.forEach(day => {
-		addButtonAction(bot, `btn${day}`, getLessonsForDay(day, dataBase, false))
-		addButtonAction(bot, `btn${day}NextWeek`, getLessonsForDay(day, dataBase, true))
+		addButtonAction(bot, `btn${day}`, getLessonsForDay(day, dataBase))
+		addButtonAction(bot, `btn${day}NextWeek`, getLessonsForDay(day, dataBase, getWeekNumber(new Date()) + 1))
 	})
 }

@@ -17,7 +17,7 @@
 		"eol-last": "off",
 		"no-else-return": "off",
 		"spaced-comment": "off",
-		"max-len": ["error", 130],
+		"max-len": ["error", 140],
 		"import/prefer-default-export": "off",
 		"no-nested-ternary": "off",
 		"no-unused-expressions": "off",

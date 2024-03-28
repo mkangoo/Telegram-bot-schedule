@@ -16,12 +16,9 @@ export const getScheduleOutput = (lessonType, { start, end, title, description, 
 	return `\n\n⏰ ${startTime} - ${endTime}\n${lessonType}:\n<b>${lessonTitle}</b>\n${lessonDescription}\n${audienceInfo}`
 }
 
-export function getLessonsForDay(targetDay, scheduleData, statusOffset, weekNumber = getWeekNumber(new Date())) {
+export function getLessonsForDay(targetDay, scheduleData, weekNumber = getWeekNumber(new Date())) {
 	const lessonToday = scheduleData.find(({ day, events }) => day === targetDay && events)
 	if (!lessonToday) return NO_LESSONS_MESSAGE
-
-	const { weekOffset } = statusOffset
-	if (weekOffset) weekNumber += 1
 
 	const formattedLessons = lessonToday.events
 		.map(event => {
@@ -37,36 +34,41 @@ export const getFullSchedule = shiftWeek => {
 	const scheduleWeek = orderedWeekDays
 		.filter(day => day !== 'Sunday' && day !== 'Saturday')
 		.map(day => {
-			const scheduleDay = getLessonsForDay(day, dataBase, shiftWeek).trim()
+			const scheduleDay = getLessonsForDay(
+				day,
+				dataBase,
+				shiftWeek ? getWeekNumber(new Date()) + 1 : getWeekNumber(new Date()),
+			).trim()
 			return `\n🛑 <b>${day}</b>:\n\n ${scheduleDay}\n`
 		})
 	return scheduleWeek.join('')
 }
 
-const getTodayIndex = date => {
-	const currentHours = date.getUTCHours()
+export const checkIsSunday = dayIndex => {
+	return orderedWeekDays[dayIndex] === 'Sunday'
+}
+
+export const getTodayIndex = date => {
 	// Time zone offset in Moscow
-	date.setUTCHours(currentHours + 3)
+	const timeOffset = 3
+	const currentHours = date.getUTCHours()
+	date.setUTCHours(currentHours + timeOffset)
 	const currentDay = date.getDay()
 	const dayIndex = currentDay % 7
 	return dayIndex % 7
 }
 
-const getTomorrowIndex = () => {
-	return getTodayIndex(new Date()) + 1
-}
-
-const checkIsSunday = dayIndex => {
-	return orderedWeekDays[dayIndex] === 'Sunday'
+export const getTomorrowIndex = date => {
+	return getTodayIndex(date) + 1
 }
 
 export const getTodaySchedule = () => {
 	const dayIndex = getTodayIndex(new Date())
-	return getLessonsForDay(orderedWeekDays[dayIndex], dataBase, { weekOffset: false })
+	return getLessonsForDay(orderedWeekDays[dayIndex], dataBase)
 }
 
 export const getTomorrowSchedule = () => {
-	const lastDayIndex = getTomorrowIndex()
-	const checkOnSunday = checkIsSunday(getTodayIndex(new Date()))
-	return getLessonsForDay(orderedWeekDays[lastDayIndex], dataBase, { weekOffset: checkOnSunday })
+	const lastDayIndex = getTomorrowIndex(new Date())
+	const isSunday = checkIsSunday(getTodayIndex(new Date()))
+	return getLessonsForDay(orderedWeekDays[lastDayIndex], dataBase, isSunday ? getWeekNumber(new Date()) + 1 : getWeekNumber(new Date()))
 }

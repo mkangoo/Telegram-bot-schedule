@@ -1,13 +1,13 @@
 import { Markup } from 'telegraf'
 
-export const getButtonDaysOfWeek = weekOffset => {
-	const statusOffset = JSON.parse(Object.values(weekOffset).join())
+export const getButtonDaysOfWeek = statusOffset => {
+	const { weekOffset } = statusOffset
 	return Markup.inlineKeyboard([
-		[Markup.button.callback('Понедельник', statusOffset ? 'btnMondayNextWeek' : 'btnMonday')],
-		[Markup.button.callback('Вторник', statusOffset ? 'btnTuesdayNextWeek' : 'btnTuesday')],
-		[Markup.button.callback('Среда', statusOffset ? 'btnWednesdayNextWeek' : 'btnWednesday')],
-		[Markup.button.callback('Четверг', statusOffset ? 'btnThursdayNextWeek' : 'btnThursday')],
-		[Markup.button.callback('Пятница', statusOffset ? 'btnFridayNextWeek' : 'btnFriday')],
+		[Markup.button.callback('Понедельник', weekOffset ? 'btnMondayNextWeek' : 'btnMonday')],
+		[Markup.button.callback('Вторник', weekOffset ? 'btnTuesdayNextWeek' : 'btnTuesday')],
+		[Markup.button.callback('Среда', weekOffset ? 'btnWednesdayNextWeek' : 'btnWednesday')],
+		[Markup.button.callback('Четверг', weekOffset ? 'btnThursdayNextWeek' : 'btnThursday')],
+		[Markup.button.callback('Пятница', weekOffset ? 'btnFridayNextWeek' : 'btnFriday')],
 	])
 }
 
